@@ -2,16 +2,16 @@ import React from 'react';
 
 const Footer = () => {
     return (
-<footer className="footer bg-[#f8e8d3] text-base-content p-10 place-items-center">
-  <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    <nav>
+<footer className="bg-[#fae7ce] text-base-content p-10">
+  <div className="container mx-auto grid md:grid-cols-3 gap-8 justify-start md:justify-items-center">
+    <nav className='flex flex-col'>
       <h6 className="footer-title text-lg font-bold">Our Coffee</h6>
       <a className="link link-hover">Espresso</a>
       <a className="link link-hover">Latte</a>
       <a className="link link-hover">Cappuccino</a>
       <a className="link link-hover">Mocha</a>
     </nav>
-    <nav>
+    <nav className='flex flex-col'>
       <h6 className="footer-title text-lg font-bold">About Us</h6>
       <a className="link link-hover">Our Story</a>
       <a className="link link-hover">Our Baristas</a>
@@ -58,6 +58,7 @@ const Footer = () => {
     <p>&copy; {new Date().getFullYear()} Coffee Bliss. All rights reserved.</p>
   </div>
 </footer>
+
 
 
 

@@ -9,10 +9,8 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//=====================>>
 const uri = `mongodb+srv://${process.env.USER_ID}:${process.env.PASS}@cluster0.hjkzu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -23,11 +21,49 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    await client.connect();
-
     const coffeeCollections = client.db("Coffee_DB").collection("coffee-list");
+    const userCollections = client.db("Coffee_DB").collection("user-list");
 
-    //Create Data
+    //Create Data =====>> User Section
+    app.post("/users", async (req, res) => {
+      const newUser = req.body;
+      const result = await userCollections.insertOne(newUser);
+      res.send(result);
+      console.log(newUser, "result", result);
+    });
+
+    //get Data
+    app.get("/users", async (req, res) => {
+      const cursor = userCollections.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    //Get Single data
+    app.get("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await userCollections.findOne(query);
+      res.send(result);
+    });
+
+    //Update or Patch data
+    app.patch("/users", async (req, res) => {
+      const email = req.body.email;
+      const filter = { email };
+      const updateUser = {
+        $set: {
+          name: req.body.name,
+          email: email,
+          photo: req.body.photo,
+        },
+      };
+      const result = await userCollections.updateOne(filter, updateUser);
+      res.send(result);
+      console.log(result)
+    });
+
+    //Create Data ======>> Coffee Section
     app.post("/coffee-add", async (req, res) => {
       const newCoffee = req.body;
       const result = await coffeeCollections.insertOne(newCoffee);
@@ -84,18 +120,11 @@ async function run() {
       );
       res.send(result);
     });
-
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
   } finally {
     // await client.close();
   }
 }
 run().catch(console.dir);
-
-//=====================>>
 
 app.get("/", (req, res) => {
   res.send("server running!");

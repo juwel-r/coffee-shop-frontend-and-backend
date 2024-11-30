@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const UpdateCoffee = () => {
   const coffee = useLoaderData();
