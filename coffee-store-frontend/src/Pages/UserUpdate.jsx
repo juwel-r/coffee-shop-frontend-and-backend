@@ -12,7 +12,7 @@ const UserUpdate = () => {
     const photo = e.target.photoURL.value;
     const userData = { name, email, photo };
 
-    fetch("http://localhost:5000/users", {
+    fetch(`https://cofee-store-backend.vercel.app/users/${user._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

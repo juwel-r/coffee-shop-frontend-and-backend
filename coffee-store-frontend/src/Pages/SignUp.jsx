@@ -20,7 +20,7 @@ const SignUp = () => {
     signUp(email, password)
       .then((result) => {
         console.log(result);
-        fetch("http://localhost:5000/users", {
+        fetch("https://cofee-store-backend.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -37,7 +37,7 @@ const SignUp = () => {
                 confirmButtonText: "Ok",
               }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate('/')
+                  navigate("/");
                 }
               });
             }

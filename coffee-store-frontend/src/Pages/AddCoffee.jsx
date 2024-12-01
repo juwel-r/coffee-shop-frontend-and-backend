@@ -17,7 +17,7 @@ const AddCoffee = () => {
     const newCoffee = { name, chef, supplier, taste, category, details, photo };
     // console.log(newCoffee);
 
-    fetch("http://localhost:5000/coffee-add", {
+    fetch("https://cofee-store-backend.vercel.app/coffee-add", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +35,7 @@ const AddCoffee = () => {
           });
         }
         // console.log(data);
-        form.reset()
+        form.reset();
       })
       .catch((error) => {
         Swal.fire({

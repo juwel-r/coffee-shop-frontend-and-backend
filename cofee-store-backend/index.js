@@ -48,13 +48,13 @@ async function run() {
     });
 
     //Update or Patch data
-    app.patch("/users", async (req, res) => {
-      const email = req.body.email;
-      const filter = { email };
+    app.patch("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
       const updateUser = {
         $set: {
           name: req.body.name,
-          email: email,
+          email: req.body.email,
           photo: req.body.photo,
         },
       };

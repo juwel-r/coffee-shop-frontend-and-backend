@@ -17,7 +17,7 @@ const Coffee = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffee-list/${id}`, {
+        fetch(`https://cofee-store-backend.vercel.app/coffee-list/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -29,8 +29,8 @@ const Coffee = ({ coffee, coffees, setCoffees }) => {
                 text: "Coffee has been deleted!",
                 icon: "success",
               });
-              const remainingCoffees =  coffees.filter(c => c._id !=id)
-              setCoffees(remainingCoffees)
+              const remainingCoffees = coffees.filter((c) => c._id != id);
+              setCoffees(remainingCoffees);
             }
           });
       }
@@ -64,15 +64,13 @@ const Coffee = ({ coffee, coffees, setCoffees }) => {
         </p>
       </div>
       <div className="flex flex-col space-y-4">
-
         <Link to={`/coffee-details/${_id}`}>
-        <button className="btn text-2xl text-white bg-black rounded-lg">
-        <FaEye></FaEye>
-        </button>
+          <button className="btn text-2xl text-white bg-black rounded-lg">
+            <FaEye></FaEye>
+          </button>
         </Link>
         <Link to={`/update-coffee/${_id}`}>
           <button className="btn text-2xl text-white bg-[#D2B48C] rounded-lg">
-            
             <FaEdit></FaEdit>
           </button>
         </Link>

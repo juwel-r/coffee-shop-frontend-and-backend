@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -21,33 +21,39 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-coffee",
-        element: <AddCoffee></AddCoffee>
+        element: <AddCoffee></AddCoffee>,
       },
       {
-        path:'/update-coffee/:id',
+        path: "/update-coffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
-        loader:({params})=>fetch(`http://localhost:5000/coffee-list/${params.id}`)
+        loader: ({ params }) =>
+          fetch(
+            `https://cofee-store-backend.vercel.app/coffee-list/${params.id}`
+          ),
       },
       {
-        path:'/coffee-details/:id',
+        path: "/coffee-details/:id",
         element: <DetailsCoffee></DetailsCoffee>,
-        loader:({params})=>fetch(`http://localhost:5000/coffee-list/${params.id}`)
-
+        loader: ({ params }) =>
+          fetch(
+            `https://cofee-store-backend.vercel.app/coffee-list/${params.id}`
+          ),
       },
       {
-        path:'/sign-up',
-        element:<SignUp/>
+        path: "/sign-up",
+        element: <SignUp />,
       },
       {
-        path:"/users",
-        element:<Users></Users>,
-        loader: ()=>fetch('http://localhost:5000/users')
+        path: "/users",
+        element: <Users></Users>,
+        loader: () => fetch("https://cofee-store-backend.vercel.app/users"),
       },
       {
-        path:'/user/update/:id',
-        element:<UserUpdate></UserUpdate>,
-        loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
-      }
+        path: "/user/update/:id",
+        element: <UserUpdate></UserUpdate>,
+        loader: ({ params }) =>
+          fetch(`https://cofee-store-backend.vercel.app/users/${params.id}`),
+      },
     ],
   },
 ]);
